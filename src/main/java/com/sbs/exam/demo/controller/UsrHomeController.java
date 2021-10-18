@@ -12,32 +12,17 @@ public class UsrHomeController {
 	UsrHomeController(){
 		 count = 0;
 	}
-	
-	@RequestMapping("/usr/home/main")
+
+	@RequestMapping("/usr/home/getCount")
 	@ResponseBody
-	public String show() {
-		return "안녕하세요";
-	}
-	@RequestMapping("/usr/home/main2")
-	@ResponseBody
-	public String show2() {
-		return "반갑습니다";
-	}
-	@RequestMapping("/usr/home/main3")
-	@ResponseBody
-	public String show3() {
-		return "잘가세요";
-	}
-	@RequestMapping("/usr/home/main4")
-	@ResponseBody
-	public int show4() {
+	public int getCount() {
 		
-		return count++;
+		return count;
 	}
-	@RequestMapping("/usr/home/main5")
+	@RequestMapping("/usr/home/doSetCount")
 	@ResponseBody
-	public String show5() {
-		count = 0;
-		return "count의 값이 0으로 초기화 되었습니다.";
+	public String doSetCount(int count, int count2) {
+		this.count = count;
+		return "count의 값이 " + this.count + "으로 초기화 되었습니다.";
 	}
 }
