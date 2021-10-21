@@ -1,66 +1,44 @@
 package com.sbs.exam.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.vo.Article;
 
 @Service
 public class ArticleService {
-	private int articlesLastId;
-	private List<Article> articles;
+	private ArticleRepository articleRepository;
 
-	public ArticleService() {
-		articlesLastId = 0;
-		articles = new ArrayList<>();
-		makeTestData();
+	public ArticleService(ArticleRepository articleRepository) {
+		this.articleRepository = articleRepository;
+		articleRepository.makeTestData();
 	}
 
-	public void makeTestData() {
-		for (int i = 1; i <= 10; i++) {
-			String title = "제목" + i;
-			String body = "내용" + i;
-			writeArticle(title, body);
-
-		}
-
-	}
 
 	public Article writeArticle(String title, String body) {
-		int id = articlesLastId + 1;
-		Article article = new Article(id, title, body);
-		articles.add(article);
-		articlesLastId = id;
-		return article;
-	}
-
-	public Article getArticle(int id) {
-		for (int i = 0; i < articles.size(); i++) {
-			Article article = articles.get(i);
-			if (article.getId() == id) {
-				return article;
-			}
-		}
-		return null;
-	}
-
-	public void deleteArticle(int id) {
-		Article article = getArticle(id);
-
-		articles.remove(article);
-	}
-
-	public void modifyArticle(int id, String title, String body) {
-		Article article = getArticle(id);
-
-		article.setTitle(title);
-		article.setBody(body);
+		
+		return articleRepository.writeArticle(title, body);
 	}
 
 	public List<Article> getArticles() {
-		return articles;
+		
+		return articleRepository.getArticles();
 	}
 
+	public Article getArticle(int id) {
+		
+		return articleRepository.getArticle(id);
+	}
+
+	public void deleteArticle(int id) {
+		articleRepository.deleteArticle(id);
+		
+	}
+
+	public void modifyArticle(int id, String title, String body) {
+		articleRepository.modifyArticle(id, title, body);
+	}
 }
