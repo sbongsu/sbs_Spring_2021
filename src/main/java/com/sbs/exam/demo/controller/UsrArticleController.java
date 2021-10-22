@@ -31,7 +31,7 @@ public class UsrArticleController {
 		return articleService.getArticles();
 	}
 
-	@RequestMapping("usr/article/getArticleAction")
+	@RequestMapping("usr/article/getArticle")
 	@ResponseBody
 	public Object getArticleAction(int id) {
 		Article article = articleService.getArticle(id);
