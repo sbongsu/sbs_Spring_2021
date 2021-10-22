@@ -1,62 +1,32 @@
 package com.sbs.exam.demo.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import com.sbs.exam.demo.vo.Article;
 
-@Component
-public class ArticleRepository {
-	private int articlesLastId;
-	private List<Article> articles;
+@Mapper
+public interface ArticleRepository {
 
-	public ArticleRepository() {
-		articlesLastId = 0;
-		articles = new ArrayList<>();
-	}
+	// INSER INTO article SET regDate = NOW(), updateDate = NOW(), title = ?, body = ?
+	public Article writeArticle(String title, String body);
+	
+	@Select("select * from article where id = #{id}")
+	public Article getArticle(@Param("id") int id);
 
-	public void makeTestData() {
-		for (int i = 1; i <= 10; i++) {
-			String title = "제목" + i;
-			String body = "내용" + i;
-			writeArticle(title, body);
-		}
-}
-	public Article writeArticle(String title, String body) {
-		int id = articlesLastId + 1;
-		Article article = new Article(id, title, body);
-		articles.add(article);
-		articlesLastId = id;
-		return article;
-	}
+	
+	// DELETE * FROM article WHERE id = ?
+	public void deleteArticle(int id);
 
-	public Article getArticle(int id) {
-		for (int i = 0; i < articles.size(); i++) {
-			Article article = articles.get(i);
-			if (article.getId() == id) {
-				return article;
-			}
-		}
-		return null;
-	}
+	
+	// UPDATE article SET regDate = NOW(), updateDate = NOW(), title = ? , body = ? WHERE id = ?
+	public void modifyArticle(int id, String title, String body);
 
-	public void deleteArticle(int id) {
-		Article article = getArticle(id);
-
-		articles.remove(article);
-	}
-
-	public void modifyArticle(int id, String title, String body) {
-		Article article = getArticle(id);
-
-		article.setTitle(title);
-		article.setBody(body);
-	}
-
-	public List<Article> getArticles() {
-		return articles;
-	}
+	
+	// SELECT * FROM article
+	public List<Article> getArticles();
 
 }
