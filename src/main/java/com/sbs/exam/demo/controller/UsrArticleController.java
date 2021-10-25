@@ -58,7 +58,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doModify(int id, String title, String body) {
 		Article article = articleService.getArticle(id);
-
+		
 		if (article == null) {
 			return id + "번 게시물은 존재하지 않습니다";
 		}
