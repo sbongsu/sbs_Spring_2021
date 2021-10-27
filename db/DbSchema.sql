@@ -66,7 +66,7 @@ loginId = 'user1',
 loginPw = 'user1',
 `name` = '사용자1',
 `nickname` = '사용자1',
-cellphoneNo = '01043214321',
+cellphoneNo = '01034341122',
 email = 'fedcba@gmail.com';
 
 INSERT INTO `member`
