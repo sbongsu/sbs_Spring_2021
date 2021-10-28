@@ -19,6 +19,7 @@ public class MemberService {
 		if (oldmember != null) {
 			return -1;
 		}
+		
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 		
 		return memberRepository.getLastInsertId();
