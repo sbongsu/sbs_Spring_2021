@@ -39,6 +39,8 @@ public class UsrMemberController {
 			return "email(을)를 입력해주세요";
 		}
 		int id = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
+		
+		
 		if (id == -1) {
 			return Ut.f("(%s)(은)는 사용중인 로그인 아이디입니다.", loginId);
 		}
