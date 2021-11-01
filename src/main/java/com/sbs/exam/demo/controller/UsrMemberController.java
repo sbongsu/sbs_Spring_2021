@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sbs.exam.demo.service.MemberService;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.Member;
+import com.sbs.exam.demo.vo.ResultData;
 
 @Controller
 public class UsrMemberController {
@@ -50,7 +51,7 @@ public class UsrMemberController {
 
 		Member member = memberService.getMemberById(id);
 
-		return member;
+		return ResultData.from("S-1", Ut.f("%d번 회원 입니다.", id), member);
 	}
 
 }
