@@ -19,12 +19,19 @@ public class UsrArticleController {
 
 	@RequestMapping("usr/article/doAdd")
 	@ResponseBody
-	public Article doAdd(String title, String body) {
+	public ResultData doAdd(String title, String body) {
+		if (Ut.empty(title)) {
+			return ResultData.from("F-1", "title을(를) 입력해주세요");
+		}
+		if (Ut.empty(body)) {
+			return ResultData.from("F-2", "body을(를) 입력해주세요");
+		}
 
-		int id = articleService.writeArticle(title, body);
+		ResultData writeArticleRd = articleService.writeArticle(title, body);
+		int id = (int) writeArticleRd.getData1();
+		
 		Article article = articleService.getArticle(id);
-
-		return article;
+		return ResultData.from(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), article);
 	}
 
 	@RequestMapping("usr/article/getArticles")

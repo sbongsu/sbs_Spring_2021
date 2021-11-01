@@ -20,6 +20,6 @@ public interface ArticleRepository {
 
 	public List<Article> getArticles();
 
-	public int LastInsertId();
+	public int getLastInsertId();
 
 }
