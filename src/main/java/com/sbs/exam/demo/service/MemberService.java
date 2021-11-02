@@ -18,7 +18,7 @@ public class MemberService {
 
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
 		// 로그인 아이디 중복체크
-		Member oldmember = memberRepository.getMemberByLoginId(loginId);
+		Member oldmember = getMemberByLoginId(loginId);
 		if (oldmember != null) {
 			return ResultData.from("F-7",Ut.f("해당 로그인 아이디(%s)는 이미 사용중입니다.", loginId));
 		}
@@ -37,6 +37,10 @@ public class MemberService {
 	public Member getMemberById(int id) {
 		
 		return memberRepository.getMemberById(id);
+	}
+
+	public Member getMemberByLoginId(String loginId) {
+		return  memberRepository.getMemberByLoginId(loginId);
 	}
 
 
