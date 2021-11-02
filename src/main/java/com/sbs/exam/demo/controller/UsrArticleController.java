@@ -19,7 +19,7 @@ public class UsrArticleController {
 
 	@RequestMapping("usr/article/doAdd")
 	@ResponseBody
-	public ResultData doAdd(String title, String body) {
+	public ResultData<Article> doAdd(String title, String body) {
 		if (Ut.empty(title)) {
 			return ResultData.from("F-1", "title을(를) 입력해주세요");
 		}
@@ -36,7 +36,7 @@ public class UsrArticleController {
 
 	@RequestMapping("usr/article/getArticles")
 	@ResponseBody
-	public ResultData getArticles() {
+	public ResultData<List<Article>> getArticles() {
 
 		List<Article> getarticles= articleService.getArticles();
 		return ResultData.from("S-1", "게시물 리스트", getarticles);
@@ -44,7 +44,7 @@ public class UsrArticleController {
 
 	@RequestMapping("usr/article/getArticle")
 	@ResponseBody
-	public ResultData getArticle(int id) {
+	public ResultData<Article> getArticle(int id) {
 		Article article = articleService.getArticle(id);
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
@@ -54,25 +54,25 @@ public class UsrArticleController {
 
 	@RequestMapping("usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(int id) {
+	public ResultData<Integer> doDelete(int id) {
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
-			return id + "번 게시물은 존재하지 않습니다";
+			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 		articleService.deleteArticle(id);
-		return id + "번 게시물을 삭제했습니다.";
+		return ResultData.from("S-1", Ut.f("%d번 게시물을 삭제했습니다.", id), id);
 	}
 
 	@RequestMapping("usr/article/doModify")
 	@ResponseBody
-	public String doModify(int id, String title, String body) {
+	public ResultData<Integer> doModify(int id, String title, String body) {
 		Article article = articleService.getArticle(id);
 		
 		if (article == null) {
-			return id + "번 게시물은 존재하지 않습니다";
+			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 		articleService.modifyArticle(id, title, body);
-		return id + "번 게시물을 수정했습니다.";
+		return ResultData.from("S-1", Ut.f("%d번 게시물을 수정했습니다.", id), id);
 	}
 }
