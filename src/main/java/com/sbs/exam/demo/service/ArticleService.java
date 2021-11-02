@@ -18,7 +18,7 @@ public class ArticleService {
 	}
 
 
-	public ResultData writeArticle(String title, String body) {
+	public ResultData<Integer> writeArticle(String title, String body) {
 		articleRepository.writeArticle(title, body);
 		
 		int id = articleRepository.getLastInsertId();
