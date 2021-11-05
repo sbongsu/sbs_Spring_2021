@@ -13,3 +13,7 @@ spring:
     password: sbs1234
 mybatis:
   type-aliases-package: com.sbs.exam.demo.vo
+custom:
+  logging:
+    dir: log
+    level: debug 
