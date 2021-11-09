@@ -6,9 +6,21 @@
 <title>메인</title>
 </head>
 <body>
-		<h1>메인페이지</h1>
-		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio magnam incidunt possimus sunt temporibus
-				non error repellendus eum nulla nesciunt vel illum perferendis accusamus maiores mollitia. Sint at tempore
-				doloribus!</div>
+	<h1>메인페이지</h1>
+	<header>
+		<a href="/">사이트A</a>
+
+		<ul>
+			<li>
+				<a href="/">홈</a>
+			</li>
+			<li>
+				<a href="/usr/article/list">리스트</a>
+			</li>
+		</ul>
+	</header>
+	<hr />
+	<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio magnam incidunt possimus sunt temporibus non
+		error repellendus eum nulla nesciunt vel illum perferendis accusamus maiores mollitia. Sint at tempore doloribus!</div>
 </body>
 </html>
