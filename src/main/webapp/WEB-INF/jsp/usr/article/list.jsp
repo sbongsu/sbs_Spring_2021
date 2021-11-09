@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>List</title>
+<link rel="stylesheet" href="/resource/common.css">
+<script src="/resource/common.js"></script>
 </head>
 <body>
 	<h1>List</h1>
