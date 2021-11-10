@@ -32,7 +32,7 @@
               <td>${article.updateDate.substring(2,16)}</td>
               <td>${article.extra__writerName}</td>
               <td>
-                <a href="../article/detail?id=${article.id}">${article.title}</a>
+                <a href="../article/detail?id=${article.id}" class="btn-text-link ml-2">${article.title}</a>
               </td>
             </tr>
           </c:forEach>
