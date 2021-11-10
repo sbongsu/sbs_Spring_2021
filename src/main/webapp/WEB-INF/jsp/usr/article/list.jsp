@@ -8,13 +8,20 @@
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
       <table border="1">
+        <colgroup>
+          <col width="80">
+          <col width="150">
+          <col width="150">
+          <col width="150">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th>번호</th>
             <th>작성날짜</th>
             <th>수정날짜</th>
-            <th>제목</th>
             <th>작성자</th>
+            <th>제목</th>
           </tr>
         </thead>
         <tbody>
@@ -23,11 +30,10 @@
               <td>${article.id}</td>
               <td>${article.regDate.substring(2,16)}</td>
               <td>${article.updateDate.substring(2,16)}</td>
+              <td>${article.memberId}</td>
               <td>
                 <a href="../article/detail?id=${article.id}">${article.title}</a>
               </td>
-              <td>${article.memberId}</td>
-
             </tr>
           </c:forEach>
         </tbody>
