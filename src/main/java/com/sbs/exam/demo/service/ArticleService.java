@@ -27,14 +27,14 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
-	public List<Article> getArticles() {
+	public List<Article> getForPrintArticles() {
 		
-		return articleRepository.getArticles();
+		return articleRepository.getForPrintArticles();
 	}
 
-	public Article getArticle(int id) {
+	public Article getForPrintArticle(int id) {
 		
-		return articleRepository.getArticle(id);
+		return articleRepository.getForPrintArticle(id);
 	}
 
 	public void deleteArticle(int id) {
@@ -44,7 +44,7 @@ public class ArticleService {
 
 	public Article modifyArticle(int id, String title, String body) {
 		articleRepository.modifyArticle(id, title, body);
-		Article article =  getArticle(id);
+		Article article =  getForPrintArticle(id);
 		return article;
 	}
 }
