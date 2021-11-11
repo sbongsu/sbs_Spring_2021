@@ -89,6 +89,12 @@ UPDATE article
 SET memberId = 2
 WHERE memberId = 0;
 
+# Article/Member.nickname 조인 (extra__writerName)
+SELECT a.*, m.nickname AS extra__writerName
+FROM article a
+LEFT JOIN `member` m
+ON a.memberId = m.id
+WHERE a.id = 1;
 
 SELECT *
 FROM article;
