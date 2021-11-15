@@ -3,7 +3,6 @@ package com.sbs.exam.demo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,11 +26,6 @@ public class UsrArticleController {
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
-		
-
-		if (rq.isLogined() == false) {
-			return ResultData.from("F-A", "로그인을 해주세요!");
-		}
 
 		if (Ut.empty(title)) {
 			return ResultData.from("F-1", "title을(를) 입력해주세요");
@@ -90,9 +84,6 @@ public class UsrArticleController {
 	
 		Rq rq = (Rq) req.getAttribute("rq");
 
-		if (rq.isLogined() == false) {
-			return Ut.jsHistoryBack("로그인후 이용해주세요!");
-		}
 		Article article = articleService.getForPrintArticle(rq.getIsLoginedMemberId(), id);
 		if (article == null) {
 			return Ut.jsHistoryBack("게시물이 존재하지 않습니다.");
@@ -111,10 +102,6 @@ public class UsrArticleController {
 	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
-
-		if (rq.isLogined() == false) {
-			return ResultData.from("F-A", "로그인을 해주세요!");
-		}
 		
 		Article article = articleService.getForPrintArticle(rq.getIsLoginedMemberId(), id);
 		
