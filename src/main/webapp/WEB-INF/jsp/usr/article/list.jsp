@@ -6,8 +6,8 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
-      <table border="1">
+    <div class="toverflow-x-auto">
+      <table class="table mx-auto w-2/3">
         <colgroup>
           <col width="80">
           <col width="150">
@@ -16,7 +16,7 @@
           <col>
         </colgroup>
         <thead>
-          <tr>
+          <tr class="text-center">
             <th>번호</th>
             <th>작성날짜</th>
             <th>수정날짜</th>
@@ -26,12 +26,12 @@
         </thead>
         <tbody>
           <c:forEach var="article" items="${articles}">
-            <tr>
+            <tr class="hover text-center">
               <td>${article.id}</td>
               <td>${article.regDate.substring(2,16)}</td>
               <td>${article.updateDate.substring(2,16)}</td>
               <td>${article.extra__writerName}</td>
-              <td>
+              <td class="text-left">
                 <a href="../article/detail?id=${article.id}" class="btn-text-link ml-2">${article.title}</a>
               </td>
             </tr>

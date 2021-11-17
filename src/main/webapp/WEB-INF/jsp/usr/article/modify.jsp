@@ -8,10 +8,7 @@
   <div class="container mx-auto px-3">
     <form class="table-box-type-1" method="POST" action="../article/doModify">
       <input type="hidden" name="id" value="${article.id}" />
-      <table>
-        <colgroup>
-          <col width="200" />
-        </colgroup>
+      <table class="border-collapse border-2 border-gray-500">
         <tbody>
           <tr>
             <th>번호</th>
@@ -32,25 +29,25 @@
           <tr>
             <th>제목</th>
             <td>
-              <input class="w-96" name="title" type="text" placeholder="제목" value="${article.title}" />
+              <input class="w-96 input input-bordered" name="title" type="text" placeholder="제목" value="${article.title}" />
             </td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea class="w-full" name="body" rows="10">${article.body}</textarea>
+              <textarea class="w-full textarea h-24 textarea-bordered" name="body" rows="10">${article.body}</textarea>
             </td>
           </tr>
           <tr>
             <th>수정</th>
             <td>
-              <input class="btn-text-link" type="submit" value="수정" />
-              <button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>
-              <c:if test="${article.extra__actorCanDelete}">
-                <a class="btn-text-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
+              <input class="btn btn-outline" type="submit" value="수정" />
+              <button class="btn btn-outline btn-secondary" type="button" onclick="history.back();">뒤로가기</button>
+             <!--  <c:if test="${article.extra__actorCanDelete}">
+                <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
                   href="../article/doDelete?id=${article.id}"
                 >게시물 삭제</a>
-              </c:if>
+              </c:if> -->
             </td>
           </tr>
         </tbody>

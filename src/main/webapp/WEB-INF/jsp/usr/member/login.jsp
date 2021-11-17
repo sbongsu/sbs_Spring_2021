@@ -6,33 +6,20 @@
 
 
 <section class="mt-5">
-  <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../member/doLogin">
-      <table>
-        <colgroup>
-          <col width="100">
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>아이디</th>
-            <td>
-              <input name="loginId" type="text" class="w-96" / placeholder="로그인 아이디">
-            </td>
-          </tr>
-          <tr>
-            <th>비밀번호</th>
-            <td>
-              <input name="loginPw" type="password" class="w-96" / placeholder="로그인 비밀번호">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="mt-2">
-        <input type="submit" value="로그인" />
-        <button type="button" onclick="history.back();">뒤로가기</button>
-      </div>
-    </form>
+  <form method="POST" action="../member/doLogin">
+    <div class="form-control w-96 mx-auto">
+      <label class="label">
+        <span class="label-text">ID 로그인</span>
+      </label>
+      <input name="loginId" type="text" placeholder="아이디" class="input input-bordered w-96">
 
-  </div>
+      <input name="loginPw" type="password" placeholder="비밀번호" class="input input-bordered w-96 mt-2">
+      <div class="mt-2 text-center">
+        <button type="submit" class="btn btn-outline">로그인</button>
+        <button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
+      </div>
+    </div>
+  </form>
+
 
   <%@ include file="../common/foot.jspf"%>

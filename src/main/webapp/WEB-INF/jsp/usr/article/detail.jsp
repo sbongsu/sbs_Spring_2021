@@ -39,12 +39,13 @@
       </table>
     </div>
     <div class="btns mt-2">
-      <button onclick="history.back()" class="btn-text-link ml-2">뒤로가기</button>
-        <a onclick="if(confirm('게시물을 수정하시겠습니까?') == false ){return false}" href="../article/modify?id=${article.id}" class="btn-text-link ml-2">게시물 수정</a>
-      <c:if test="${ article.extra__actorCanDelete }">
-        <a onclick="if(confirm('게시물을 삭제하시겠습니까?') == false ){return false}" href="../article/doDelete?id=${article.id}" class="btn-text-link ml-2">게시물 삭제</a>
+    <c:if test="${ article.extra__actorCan }">
+        <a onclick="if(confirm('게시물을 수정하시겠습니까?') == false ){return false}" href="../article/modify?id=${article.id}" class="btn btn-outlineml-2">게시물 수정</a>
       </c:if>
-      
+      <c:if test="${ article.extra__actorCan }">
+        <a onclick="if(confirm('게시물을 삭제하시겠습니까?') == false ){return false}" href="../article/doDelete?id=${article.id}" class="btn btn-outlineml-2">게시물 삭제</a>
+      </c:if>
+        <button onclick="history.back()" class="btn btn-outline btn-secondary ml-2">뒤로가기</button>
     </div>
   </div>
 </section>
