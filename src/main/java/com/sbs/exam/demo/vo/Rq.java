@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sbs.exam.demo.util.Ut;
+
 import lombok.Getter;
 
 public class Rq {
@@ -35,13 +37,9 @@ public class Rq {
 		     
 	}
 
-	public void printHistoryBackJs() {
-		
+	public void printHistoryBackJs(String msg) {
 		res.setContentType("text/html; charset=utf-8");
-		print("<script>");
-		print("alert('로그인 후 이용해주세요');");
-		print("history.back();");
-		print("</script>");
+		print(Ut.jsHistoryBack(msg));
 		
 	}
 	
@@ -65,5 +63,10 @@ public class Rq {
 		
 	}
 	
-	
+	public String historyBackOnView(String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", true);
+
+		return "common/js";
+	}
 }
