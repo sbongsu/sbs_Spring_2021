@@ -51,7 +51,7 @@ public class ArticleService {
 			return;
 		}
 		if(article.getMemberId() == actorId) {
-			article.setExtra__actorCan(true);
+			article.setExtra__actorCanDelete(true);
 		}
 	}
 
