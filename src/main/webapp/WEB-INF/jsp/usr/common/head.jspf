@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${pageTitle}</title>
+<title>${board.name}</title>
 
 <!-- 제이쿼리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -36,8 +36,13 @@
           </a>
         </li>
         <li>
-          <a class="h-full flex items-center px-3 hover:underline" href="/usr/article/list">
-            <span>리스트</span>
+          <a class="h-full flex items-center px-3 hover:underline" href="/usr/article/list?boardId=1">
+            <span>공지사항 게시판</span>
+          </a>
+        </li>
+        <li>
+          <a class="h-full flex items-center px-3 hover:underline" href="/usr/article/list?boardId=2">
+            <span>자유 게시판1</span>
           </a>
         </li>
         <c:if test="${rq.isLogined()}">
@@ -66,6 +71,8 @@
 
   </header>
   <section class="mt-5">
-    <div class="container mx-auto px-3">${pageTitle}</div>
+    <div class="container mx-auto px-3">
+      <h1>${board.name}</h1>
+    </div>
   </section>
   <main>

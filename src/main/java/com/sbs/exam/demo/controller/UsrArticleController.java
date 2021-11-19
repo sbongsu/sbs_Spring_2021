@@ -4,22 +4,29 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.exam.demo.service.ArticleService;
+import com.sbs.exam.demo.service.BoardService;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.Article;
+import com.sbs.exam.demo.vo.Board;
 import com.sbs.exam.demo.vo.ResultData;
 import com.sbs.exam.demo.vo.Rq;
 
 @Controller
 public class UsrArticleController {
-	@Autowired
+	
 	private ArticleService articleService;
+	private BoardService boardService;
+
+	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+		this.articleService = articleService;
+		this.boardService = boardService;
+	}
 
 	@RequestMapping("usr/article/write")
 	public String showWrite(HttpServletRequest req) {
@@ -50,12 +57,14 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("usr/article/list")
-	public String showList(HttpServletRequest req, Model model) {
+	public String showList(HttpServletRequest req, Model model, int boardId) {
+		Board board = boardService.getBoardById(boardId);
 
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		List<Article> articles = articleService.getForPrintArticles(rq.getIsLoginedMemberId());
 
+		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
 		return "usr/article/list";
 	}
@@ -94,14 +103,14 @@ public class UsrArticleController {
 
 		Article article = articleService.getForPrintArticle(rq.getIsLoginedMemberId(), id);
 		if (article == null) {
-			return Ut.jsHistoryBack("게시물이 존재하지 않습니다.");
+			return rq.jsHistoryBack("게시물이 존재하지 않습니다.");
 		}
 		if (article.getMemberId() != rq.getIsLoginedMemberId()) {
-			return Ut.jsHistoryBack("해당 게시물에 대한 권한이 없습니다.");
+			return rq.jsHistoryBack("해당 게시물에 대한 권한이 없습니다.");
 		}
 		articleService.deleteArticle(id);
 
-		return Ut.jsReplace(Ut.f("%d번 게시물을 삭제했습니다.", id), "/usr/article/list");
+		return rq.jsReplace(Ut.f("%d번 게시물을 삭제했습니다.", id), "/usr/article/list");
 	}
 
 	@RequestMapping("/usr/article/modify")
@@ -132,15 +141,15 @@ public class UsrArticleController {
 		Article article = articleService.getForPrintArticle(rq.getIsLoginedMemberId(), id);
 
 		if (article == null) {
-			return Ut.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다.", id));
+			return rq.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getIsLoginedMemberId(), article);
 
 		if (actorCanModifyRd.isFail()) {
-			return Ut.jsHistoryBack(actorCanModifyRd.getMsg());
+			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
 		}
 		articleService.modifyArticle(rq.getIsLoginedMemberId(), id, title, body);
-		return Ut.jsReplace(Ut.f("%d번 게시물이 수정되었습니다.", id), Ut.f("../article/detail?id=%d", id));
+		return rq.jsReplace(Ut.f("%d번 게시물이 수정되었습니다.", id), Ut.f("../article/detail?id=%d", id));
 	}
 }
