@@ -46,6 +46,10 @@
 		FROM article a
 		LEFT JOIN `member` m
 		ON a.memberId = m.id
+		WHERE 1
+		<if test="boardId != 0">
+			AND A.boardId = #{boardId}
+		</if>
 		ORDER
 		BY id DESC
 	</select>
