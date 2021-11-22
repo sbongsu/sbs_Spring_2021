@@ -14,11 +14,13 @@
 	</insert>
 
 	<select id="getForPrintArticle" resultType="Article">
-		SELECT a.*, m.nickname AS extra__writerName
+		SELECT a.*,
+		m.nickname AS extra__writerName
 		FROM
 		article a
 		LEFT JOIN `member` m
-		ON a.memberId = m.id
+		ON
+		a.memberId = m.id
 		WHERE a.id = #{id}
 	</select>
 
@@ -44,7 +46,8 @@
 	<select id="getForPrintArticles" resultType="Article">
 		SELECT a.*, m.nickname AS extra__writerName
 		FROM article a
-		LEFT JOIN `member` m
+		LEFT JOIN
+		`member` m
 		ON a.memberId = m.id
 		WHERE 1
 		<if test="boardId != 0">
@@ -52,6 +55,15 @@
 		</if>
 		ORDER
 		BY id DESC
+	</select>
+
+	<select id="getAritlceConuts" resultType="int">
+		SELECT COUNT(*)
+		FROM article AS A
+		WHERE 1
+		<if test="boardId != 0">
+			AND A.boardId = #{boardId}
+		</if>
 	</select>
 
 	<select id="getLastInsertId" resultType="int">

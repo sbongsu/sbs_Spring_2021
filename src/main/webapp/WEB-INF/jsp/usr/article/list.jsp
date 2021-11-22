@@ -6,6 +6,9 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
+  <div>
+  게시물 갯수 : ${articleCounts } 개
+  </div>
     <div class="toverflow-x-auto">
       <table class="table mx-auto w-2/3">
         <colgroup>
