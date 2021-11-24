@@ -131,6 +131,19 @@ updateDate = NOW(),
 `code` = 'free1',
 `name` = '자유게시판';
 
+#게시물 갯수 늘리기
+/*
+INSERT INTO article
+(
+    regDate, updateDate, memberId, boardId, title, `body`
+)
+SELECT NOW(), NOW(), FLOOR(RAND() * 3 + 1), FLOOR(RAND() * 2 + 1), CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
+FROM article;
+
+select count(*) from article;
+
+*/
+
 SELECT *
 FROM article;
 SELECT *
