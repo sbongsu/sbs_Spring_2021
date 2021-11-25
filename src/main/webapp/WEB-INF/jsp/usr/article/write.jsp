@@ -26,13 +26,13 @@
           <tr>
             <th>제목</th>
             <td>
-              <input class="w-96 input input-bordered" name="title" type="text" placeholder="제목" />
+              <input required="required" class="w-96 input input-bordered" name="title" type="text" placeholder="제목" />
             </td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea class="w-full textarea textarea-bordered" name="body" rows="10" placeholder="내용"></textarea>
+              <textarea required="required" class="w-full textarea textarea-bordered" name="body" rows="10" placeholder="내용"></textarea>
             </td>
           </tr>
           <tr>
