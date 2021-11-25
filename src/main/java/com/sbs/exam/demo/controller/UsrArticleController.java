@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.exam.demo.service.ArticleService;
@@ -57,17 +58,21 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("usr/article/list")
-	public String showList(Model model, int boardId) {
+	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId, @RequestParam(defaultValue = "1") int page) {
 		
 		Board board = boardService.getBoardById(boardId);
 		
 		if (board == null) {
 			return rq.historyBackOnView(Ut.f("%d번 게시판은 존재하지 않습니다.", boardId));
 		}
-
-		List<Article> articles = articleService.getForPrintArticles(rq.getIsLoginedMemberId(), boardId);
 		
 		int articleCounts = articleService.getAritlceConuts(boardId);
+		
+		int itemsCountInApage = 10;
+
+		List<Article> articles = articleService.getForPrintArticles(rq.getIsLoginedMemberId(), boardId, itemsCountInApage, page);
+		
+
 		model.addAttribute("articleCounts", articleCounts);
 		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);

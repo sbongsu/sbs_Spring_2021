@@ -56,6 +56,10 @@
 		</if>
 		ORDER
 		BY id DESC
+		<if test="limitTake != -1">
+			LIMIT #{limitStart}, #{limitTake}
+		</if>
+		
 	</select>
 
 	<select id="getAritlceConuts" resultType="int">
