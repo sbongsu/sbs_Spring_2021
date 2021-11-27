@@ -6,9 +6,7 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-  <div>
-  게시물 갯수 : ${articleCounts } 개
-  </div>
+    <div>게시물 갯수 : ${articleCounts } 개</div>
     <div class="toverflow-x-auto">
       <table class="table mx-auto w-2/3">
         <colgroup>
@@ -41,6 +39,13 @@
           </c:forEach>
         </tbody>
       </table>
+    </div>
+    <div class="page-wrap mt-3">
+      <div class="btn-group justify-center">
+      <c:forEach begin="1" end="20" var="i">
+        <a class="btn ${param.page == i ? 'btn-active' : '' }" href="?page=${i}">${i}</a>
+      </c:forEach>
+      </div>
     </div>
   </div>
 </section>
