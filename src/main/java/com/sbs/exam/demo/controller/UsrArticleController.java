@@ -20,7 +20,7 @@ import com.sbs.exam.demo.vo.Rq;
 
 @Controller
 public class UsrArticleController {
-	
+
 	private ArticleService articleService;
 	private BoardService boardService;
 	private Rq rq;
@@ -35,7 +35,7 @@ public class UsrArticleController {
 	public String showWrite(HttpServletRequest req, Model model) {
 		return "/usr/article/write";
 	}
-	
+
 	@RequestMapping("usr/article/doWrite")
 	@ResponseBody
 	public String doWrite(int boardId, String title, String body, String replaceUri) {
@@ -47,9 +47,10 @@ public class UsrArticleController {
 			return rq.jsHistoryBack("body을(를) 입력해주세요");
 		}
 
-		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getIsLoginedMemberId(), boardId, title, body);
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getIsLoginedMemberId(), boardId, title,
+				body);
 		int id = writeArticleRd.getData1();
-		
+
 		if (Ut.empty(replaceUri)) {
 			replaceUri = Ut.f("../article/detail?id=%d", id);
 		}
@@ -58,22 +59,25 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("usr/article/list")
-	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId, @RequestParam(defaultValue = "1") int page) {
-		
+	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
+			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
+
 		Board board = boardService.getBoardById(boardId);
-		
+
 		if (board == null) {
 			return rq.historyBackOnView(Ut.f("%d번 게시판은 존재하지 않습니다.", boardId));
 		}
-		
-		int articleCounts = articleService.getAritlceConuts(boardId);
-		
-		int itemsCountInApage = 10;
-		
-		int pagesCount = (int)Math.ceil((double)articleCounts / itemsCountInApage);
 
-		List<Article> articles = articleService.getForPrintArticles(rq.getIsLoginedMemberId(), boardId, itemsCountInApage, page);
-		
+		int articleCounts = articleService.getAritlceConuts(boardId,searchKeywordTypeCode,searchKeyword);
+
+		int itemsCountInApage = 10;
+
+		int pagesCount = (int) Math.ceil((double) articleCounts / itemsCountInApage);
+
+		List<Article> articles = articleService.getForPrintArticles(rq.getIsLoginedMemberId(), boardId,
+				itemsCountInApage, page);
+
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("page", page);
 		model.addAttribute("articleCounts", articleCounts);

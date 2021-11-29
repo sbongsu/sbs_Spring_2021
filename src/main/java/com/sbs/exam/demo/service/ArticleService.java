@@ -85,9 +85,9 @@ public class ArticleService {
 	}
 
 
-	public int getAritlceConuts(int boardId) {
+	public int getAritlceConuts(int boardId, String searchKeywordTypeCode, String searchKeyword) {
 		
-		return articleRepository.getAritlceConuts(boardId);
+		return articleRepository.getAritlceConuts(boardId,searchKeywordTypeCode,searchKeyword);
 	}
 
 }
