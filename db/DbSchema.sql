@@ -144,6 +144,8 @@ select count(*) from article;
 
 */
 
+SELECT CONCAT('%','하하','%')
+
 SELECT *
 FROM article;
 SELECT *

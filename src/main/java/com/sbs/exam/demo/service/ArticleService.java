@@ -17,51 +17,50 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 
-
 	public ResultData<Integer> writeArticle(int memberId, int boardId, String title, String body) {
 		articleRepository.writeArticle(memberId, boardId, title, body);
-		
+
 		int id = articleRepository.getLastInsertId();
-		
 
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
-	public List<Article> getForPrintArticles(int actorId, int boardId, int itemsCountInApage, int page) {
-		
+	public List<Article> getForPrintArticles(int actorId, int boardId, String searchKeywordTypeCode,
+			String searchKeyword, int itemsCountInApage, int page) {
+
 		int limitStart = (page - 1) * itemsCountInApage;
 		int limitTake = itemsCountInApage;
-		
-		List<Article> articles = articleRepository.getForPrintArticles(boardId, limitStart, limitTake);
-		
-		for(Article article : articles) {
+
+		List<Article> articles = articleRepository.getForPrintArticles(boardId, searchKeywordTypeCode, searchKeyword,
+				limitStart, limitTake);
+
+		for (Article article : articles) {
 			updatePrrintForData(actorId, article);
 		}
 		return articles;
 	}
 
 	public Article getForPrintArticle(int actorId, int id) {
-		
+
 		Article article = articleRepository.getForPrintArticle(id);
-		
+
 		updatePrrintForData(actorId, article);
 		return article;
 	}
 
 	private void updatePrrintForData(int actorId, Article article) {
-		
-		if(article == null) {
+
+		if (article == null) {
 			return;
 		}
-		if(article.getMemberId() == actorId) {
+		if (article.getMemberId() == actorId) {
 			article.setExtra__actorCanDelete(true);
 		}
 	}
 
-
 	public void deleteArticle(int id) {
 		articleRepository.deleteArticle(id);
-		
+
 	}
 
 	public ResultData<Article> modifyArticle(int actorId, int id, String title, String body) {
@@ -71,7 +70,7 @@ public class ArticleService {
 
 		return ResultData.from("S-1", Ut.f("%d번 게시물을 수정하였습니다.", id), "article", article);
 	}
-	
+
 	public ResultData actorCanModify(int actorId, Article article) {
 		if (article == null) {
 			return ResultData.from("F-1", "게시물이 존재하지 않습니다.");
@@ -84,10 +83,9 @@ public class ArticleService {
 		return ResultData.from("S-1", "해당 게시물 수정이 가능합니다");
 	}
 
-
 	public int getAritlceConuts(int boardId, String searchKeywordTypeCode, String searchKeyword) {
-		
-		return articleRepository.getAritlceConuts(boardId,searchKeywordTypeCode,searchKeyword);
+
+		return articleRepository.getAritlceConuts(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
 }
