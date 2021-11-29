@@ -24,6 +24,10 @@
             <td>${article.updateDate.substring(2,16)}</td>
           </tr>
           <tr>
+            <th>조회수</th>
+            <td class="mt-3 ml-2 badge badge-primary mt-center">${article.hitCount}</td>
+          </tr>
+          <tr>
             <th>작성자</th>
             <td>${article.extra__writerName}</td>
           </tr>
