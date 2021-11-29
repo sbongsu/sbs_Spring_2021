@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.sbs.exam.demo.vo.Article;
@@ -31,5 +32,12 @@ public interface ArticleRepository {
 			WHERE id = #{id}
 			""")
 	public int increaseHitCount(int id);
+
+	@Select("""
+			SELECT hitCount
+			FROM article
+			WHERE id = #{id}
+			""")
+	public int getArticleHitCount(int id);
 
 }
