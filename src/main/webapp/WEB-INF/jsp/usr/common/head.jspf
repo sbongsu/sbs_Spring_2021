@@ -17,8 +17,10 @@
 <!-- 폰트어썸 -->
 <link rel="stylesheet" href="https://cdnjs.com/libraries/font-awesome" />
 
+<!-- 사이트 공통 CSS -->
 <link rel="stylesheet" href="/resource/common.css">
-<script src="/resource/common.js"></script>
+<!-- 사이트 공통 JS -->
+<script src="/resource/common.js" defer="defer"></script>
 
 </head>
 <body>

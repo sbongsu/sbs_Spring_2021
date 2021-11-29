@@ -6,15 +6,38 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <div>게시물 갯수 : ${articleCounts } 개</div>
-    <div class="toverflow-x-auto">
-      <table class="table mx-auto w-2/3">
+    <div class="flex justify-between">
+      <div>
+        게시물 갯수 :
+        <span class="badge badge-primary">${articleCounts } </span>
+        개
+      </div>
+
+      <form class="flex">
+      <input type="hidden" name="boardId" value="${param.boardId }" />
+        <select data-value="${param.searchKeywordTypeCode }" name="searchKeywordTypeCode"
+          class="select select-bordered mr-2"
+        >
+          <option disabled="disabled">검색타입</option>
+          <option value="title">제목</option>
+          <option value="body">내용</option>
+          <option value="title,body">제목,내용</option>
+        </select>
+        <input name="searchKeyword" type="text" class="w-72 input input-bordered" placeholder="검색어를 입력해주세요"
+          maxlength="20" value="${param.searchKeyword }"
+        />
+        <button type="submit" class="btn ml-2">검색</button>
+      </form>
+
+    </div>
+    <div class="mt-3">
+      <table class="table w-full table-zebra table-fixed">
         <colgroup>
-          <col width="80">
+          <col width="50">
           <col width="150">
           <col width="150">
           <col width="150">
-          <col>
+          <col />
         </colgroup>
         <thead>
           <tr class="text-center">
@@ -32,8 +55,9 @@
               <td>${article.regDate.substring(2,16)}</td>
               <td>${article.updateDate.substring(2,16)}</td>
               <td>${article.extra__writerName}</td>
-              <td class="text-left">
-                <a href="../article/detail?id=${article.id}" class="btn-text-link ml-2">${article.title}</a>
+              <td>
+                <a class="btn btn-ghost btn-outline w-full block truncate" href="../article/detail?id=${article.id}">
+                  ${article.title} </a>
               </td>
             </tr>
           </c:forEach>
