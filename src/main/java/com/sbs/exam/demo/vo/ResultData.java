@@ -13,6 +13,10 @@ public class ResultData<DT> {
 	private String data1Name;
 	@Getter
 	private DT data1;
+	@Getter
+	private String data2Name;
+	@Getter
+	private Object data2;
 	
 	private ResultData() {
 		
@@ -41,5 +45,9 @@ public class ResultData<DT> {
 	public static <DT> ResultData<DT> newData(ResultData joinRd, String data1Name, DT data1) {
 		
 		return from(joinRd.getResultCode(), joinRd.getMsg(), data1Name, data1);
+	}
+	public void setData2(String dataName, Object data) {
+		data2Name = dataName;
+		data2 = data ;
 	}
 }
