@@ -23,13 +23,27 @@
             <td>${article.forPrintType2UpdateDate}</td>
           </tr>
           <tr>
+            <th>조회수</th>
+            <td>
+              <span class="badge badge-primary article-detail__hit-count">${article.hitCount}</span>
+            </td>
+          </tr>
+          <tr>
+            <th>추천수</th>
+            <td>
+              <span class="badge badge-primary">${article.extra__goodReactionPoint}</span>
+            </td>
+          </tr>
+          <tr>
             <th>작성자</th>
             <td>${article.extra__writerName}</td>
           </tr>
           <tr>
             <th>제목</th>
             <td>
-              <input class="w-96 input input-bordered" name="title" type="text" placeholder="제목" value="${article.title}" />
+              <input class="w-96 input input-bordered" name="title" type="text" placeholder="제목"
+                value="${article.title}"
+              />
             </td>
           </tr>
           <tr>
@@ -43,7 +57,7 @@
             <td>
               <input class="btn btn-outline" type="submit" value="수정" />
               <button class="btn btn-outline btn-secondary" type="button" onclick="history.back();">뒤로가기</button>
-             <!--  <c:if test="${article.extra__actorCanDelete}">
+              <!--  <c:if test="${article.extra__actorCanDelete}">
                 <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
                   href="../article/doDelete?id=${article.id}"
                 >게시물 삭제</a>

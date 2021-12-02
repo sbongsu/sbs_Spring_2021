@@ -16,13 +16,18 @@
 
 	<select id="getForPrintArticle" resultType="Article">
 		SELECT a.*,
-		m.nickname AS extra__writerName
+		m.nickname AS extra__writerName,
+		IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
+		IFNULL(SUM(IF(RP.point &gt; 0, RP.point,0)),0) AS extra__goodReactionPoint,
+		IFNULL(SUM(IF(RP.point &lt; 0, RP.point,0)),0) AS extra__badReactionPoint
 		FROM
 		article a
 		LEFT JOIN `member` m
-		ON
-		a.memberId = m.id
+		ON a.memberId = m.id
+		LEFT JOIN reactionPoint AS RP
+		ON a.id = RP.relId
 		WHERE a.id = #{id}
+		GROUP BY a.id
 	</select>
 
 	<delete id="deleteArticle">

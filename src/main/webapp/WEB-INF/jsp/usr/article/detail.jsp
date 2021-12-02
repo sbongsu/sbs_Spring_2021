@@ -62,6 +62,12 @@
             </td>
           </tr>
           <tr>
+            <th>추천수</th>
+            <td>
+            <span class="badge badge-primary">${article.extra__goodReactionPoint}</span>
+            </td>
+          </tr>
+          <tr>
             <th>작성자</th>
             <td>${article.extra__writerName}</td>
           </tr>
