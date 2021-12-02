@@ -14,7 +14,7 @@
       </div>
 
       <form class="flex">
-      <input type="hidden" name="boardId" value="${param.boardId }" />
+        <input type="hidden" name="boardId" value="${param.boardId }" />
         <select data-value="${param.searchKeywordTypeCode }" name="searchKeywordTypeCode"
           class="select select-bordered mr-2"
         >
@@ -34,8 +34,10 @@
       <table class="table w-full table-zebra table-fixed">
         <colgroup>
           <col width="50">
-          <col width="150">
-          <col width="150">
+          <col width="100">
+          <col width="100">
+          <col width="100">
+          <col width="100">
           <col width="150">
           <col />
         </colgroup>
@@ -44,6 +46,8 @@
             <th>번호</th>
             <th>작성날짜</th>
             <th>수정날짜</th>
+            <th>조회수</th>
+            <th>추천수</th>
             <th>작성자</th>
             <th>제목</th>
           </tr>
@@ -54,6 +58,8 @@
               <td>${article.id}</td>
               <td>${article.forPrintType1RegDate}</td>
               <td>${article.forPrintType1UpdateDate}</td>
+              <td>${article.hitCount}</td>
+              <td>${article.extra__goodReactionPoint}</td>
               <td>${article.extra__writerName}</td>
               <td>
                 <a class="btn btn-ghost btn-outline w-full block truncate" href="../article/detail?id=${article.id}">

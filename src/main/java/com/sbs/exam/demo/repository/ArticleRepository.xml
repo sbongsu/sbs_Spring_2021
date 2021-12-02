@@ -45,6 +45,12 @@
 	</update>
 
 	<select id="getForPrintArticles" resultType="Article">
+	
+		SELECT a.*,
+		IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
+		IFNULL(SUM(IF(RP.point &gt; 0, RP.point,0)),0) AS extra__goodReactionPoint,
+		IFNULL(SUM(IF(RP.point &lt; 0, RP.point,0)),0) AS extra__badReactionPoint
+		FROM(
 		SELECT a.*, m.nickname AS extra__writerName
 		FROM article a
 		LEFT JOIN
@@ -71,11 +77,14 @@
 				</otherwise>
 			</choose>
 		</if>
-		ORDER
-		BY id DESC
 		<if test="limitTake != -1">
 			LIMIT #{limitStart}, #{limitTake}
 		</if>
+			) AS a
+			LEFT JOIN reactionPoint AS RP
+			ON a.id = RP.relId
+			GROUP BY a.id
+			ORDER BY id DESC
 		
 	</select>
 
