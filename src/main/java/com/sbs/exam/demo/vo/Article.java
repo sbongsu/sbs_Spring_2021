@@ -15,12 +15,11 @@ public class Article {
 	private int memberId;
 	private String title;
 	private String body;
+	private int goodReactionPoint;
+	private int badReactionPoint;
 	
 	private String extra__writerName;
 	private boolean extra__actorCanDelete;
-	private int extra__sumReactionPoint;
-	private int extra__goodReactionPoint;
-	private int extra__badReactionPoint;
 	
 	public String getForPrintType1UpdateDate() {
 		return updateDate.substring(2, 16).replace(" ", "<br>");
