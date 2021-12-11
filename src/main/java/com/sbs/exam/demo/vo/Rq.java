@@ -92,6 +92,21 @@ public class Rq {
 		return Ut.jsReplace(msg, uri);
 	}
 	
+	public String getCurrentUri() {
+		String currentUri = req.getRequestURI();
+		String queryString = req.getQueryString();
+
+		if (queryString != null && queryString.length() > 0) {
+			currentUri += "?" + queryString;
+		}
+
+		return currentUri;
+	}
+
+	public String getEncodedCurrentUri() {
+		return Ut.getUriEncoded(getCurrentUri());
+	}	
+	
 	//Rq 객체가 자연스럽게 생성되도록 유도하는 메서드 (로그인시 첫 화면에서 로그아웃으로 안뜨고 로그인으로 뜨는 오류해결.)
 	//지우면 안됨
 	//편의성을 높이기 위해 BeforeActionInterceptor 에서 호출 필요

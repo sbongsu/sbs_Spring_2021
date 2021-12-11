@@ -39,6 +39,23 @@ public interface ArticleRepository {
 			WHERE id = #{id}
 			""")
 	public int getArticleHitCount(int id);
+	
+	
+
+	@Update("""
+			UPDATE article
+			SET goodReactionPoint  = goodReactionPoint  + 1
+			WHERE id = #{id}
+			""")
+	public int increaseGoodReactionPoint(int id);
+
+	
+	@Update("""
+			UPDATE article
+			SET badReactionPoint  = badReactionPoint  + 1
+			WHERE id = #{id}
+			""")
+	public int increaseBadReactionPoint(int id);
 
 
 }
