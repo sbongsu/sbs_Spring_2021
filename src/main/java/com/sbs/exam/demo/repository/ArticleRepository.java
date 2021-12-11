@@ -40,14 +40,5 @@ public interface ArticleRepository {
 			""")
 	public int getArticleHitCount(int id);
 
-	
-	@Select("""
-			SELECT IFNULL(SUM(point),0) AS p
-			FROM reactionPoint AS RP
-			WHERE relTypeCode = 'article' AND
-			relId = #{id} AND
-			RP.memberId = #{memberId}
-			""")
-	public int getSumReactionPointByMemberId(int id, int memberId);
 
 }
