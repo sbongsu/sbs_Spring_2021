@@ -122,6 +122,28 @@ public class ArticleService {
 		
 	}
 
+	public ResultData decreaseGoodReactionPoint(int relId) {
+		
+		int affectedRowsCount = articleRepository.decreaseGoodReactionPoint(relId);
+		
+		if(affectedRowsCount == 0) {
+			return ResultData.from("F-1", "해당 게시물이 존재하지 않습니다.", "affectedRowsCount", affectedRowsCount);
+		}
+
+		return ResultData.from("S-1", "좋아요수가 감소되었습니다.", "affectedRowsCount", affectedRowsCount);
+	}
+
+	public ResultData decreaseBadReactionPoint(int relId) {
+		
+		int affectedRowsCount = articleRepository.decreaseBadReactionPoint(relId);
+		
+		if(affectedRowsCount == 0) {
+			return ResultData.from("F-1", "해당 게시물이 존재하지 않습니다.", "affectedRowsCount", affectedRowsCount);
+		}
+
+		return ResultData.from("S-1", "싫어요수가 감소되었습니다.", "affectedRowsCount", affectedRowsCount);
+	}
+
 
 
 }
