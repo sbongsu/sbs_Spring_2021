@@ -4,7 +4,7 @@
 <html class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<title>${board.name}</title>
+<title>${pageTitle}</title>
 
 <!-- 제이쿼리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -64,7 +64,7 @@
 
         <c:if test="${rq.isLogined() }">
           <li>
-            <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/modify">
+            <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/myPage?loginedId=${rq.isLoginedMemberId }">
               <span>${rq.loginedMember.nickname}'s Profile</span>
             </a>
           </li>
@@ -80,7 +80,7 @@
   </header>
   <section class="mt-5">
     <div class="container mx-auto px-3">
-      <h1>${board.name}</h1>
+      <h1>${pageTitle}</h1>
     </div>
   </section>
   <main>

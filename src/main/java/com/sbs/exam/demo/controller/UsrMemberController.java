@@ -1,10 +1,7 @@
 package com.sbs.exam.demo.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -110,5 +107,14 @@ public class UsrMemberController {
 		
 		return rq.jsReplace("로그아웃 되었습니다.", "/");
 
+	}
+	
+	@RequestMapping("usr/member/myPage")
+	public String showmyPage(int loginedId, Model model) {
+		Member member = memberService.getMemberById(loginedId);
+		
+		model.addAttribute("member", member);
+
+		return "usr/member/myPage";
 	}
 }
