@@ -110,11 +110,32 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("usr/member/myPage")
-	public String showmyPage(int loginedId, Model model) {
-		Member member = memberService.getMemberById(loginedId);
+	public String showmyPage(Model model) {
+		Member member = memberService.getMemberById(rq.getIsLoginedMemberId());
 		
 		model.addAttribute("member", member);
 
 		return "usr/member/myPage";
+	}
+	
+	@RequestMapping("usr/member/checkPassword")
+	public String showcheckPassword() {
+
+		return "usr/member/checkPassword";
+	}
+	
+	@RequestMapping("usr/member/docheckPassword")
+	@ResponseBody
+	public String docheckPassword(String loginPw,String replaceUri) {
+
+		if(Ut.empty(loginPw)) {
+			return rq.jsHistoryBack("loginPw를 입력해주세요.");
+		}
+		if(rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+		}
+		
+
+		return rq.jsReplace("", replaceUri);
 	}
 }
