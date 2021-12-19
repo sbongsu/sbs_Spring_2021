@@ -5,7 +5,8 @@
 <%@ include file="../common/head.jspf"%>
 
 <section class="mt-5">
-  <form method="POST" action="../member/docheckPassword">
+  <form method="POST" action="../member/doCheckPassword">
+  <input type="hidden" name="replaceUri" value="${param.replaceUri}" />
     <div class="form-control w-96 mx-auto">
       <label class="label">
         <span class="label-text">비밀번호 확인</span>

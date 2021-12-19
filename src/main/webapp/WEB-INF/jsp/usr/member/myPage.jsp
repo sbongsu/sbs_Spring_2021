@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.sbs.exam.demo.util.Ut"  %>
+<%@ page import="com.sbs.exam.demo.util.Ut" %>
+
 <c:set var="pageTitle" value="마이페이지" />
 
 <%@ include file="../common/head.jspf"%>
@@ -39,10 +40,9 @@
         </tbody>
       </table>
     </div>
-        <div class="btns mt-2">
-      <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" class="btn btn-outline">회원정보수정</a>
-      <button class="btn btn-outline" type="button"
-        onclick="history.back();">뒤로가기</button>
+    <div class="btns mt-2">
+      <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" class="btn btn-primary">회원정보수정</a>
+      <button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
 
     </div>
   </div>

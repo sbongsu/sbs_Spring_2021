@@ -118,24 +118,27 @@ public class UsrMemberController {
 		return "usr/member/myPage";
 	}
 	
-	@RequestMapping("usr/member/checkPassword")
-	public String showcheckPassword() {
-
+	@RequestMapping("/usr/member/checkPassword")
+	public String showCheckPassword() {
 		return "usr/member/checkPassword";
 	}
 	
-	@RequestMapping("usr/member/docheckPassword")
+	@RequestMapping("/usr/member/doCheckPassword")
 	@ResponseBody
-	public String docheckPassword(String loginPw,String replaceUri) {
-
-		if(Ut.empty(loginPw)) {
-			return rq.jsHistoryBack("loginPw를 입력해주세요.");
+	public String doCheckPassword(String loginPw, String replaceUri) {
+		if (Ut.empty(loginPw)) {
+			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
 		}
-		if(rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+
+		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
-		
-
 		return rq.jsReplace("", replaceUri);
+	}
+	
+	@RequestMapping("usr/member/modify")
+	public String showmodify() {
+
+		return "usr/member/modify";
 	}
 }

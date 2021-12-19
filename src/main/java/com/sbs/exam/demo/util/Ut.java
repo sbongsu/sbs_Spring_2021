@@ -61,12 +61,12 @@ public class Ut {
 		return Ut.f(script, msg, uri);
 	}
 	
-	public static String getUriEncoded(String str) {
-
-		try {
-			return URLEncoder.encode(str, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			return str;
-		}
-	}
+	 public static String getUriEncoded(String str) {
+	        try {
+	            return URLEncoder.encode(str, "UTF-8");
+	        } catch (Exception e) {
+	            return str;
+	        }
+	    }
+	 
 }
