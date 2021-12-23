@@ -205,6 +205,24 @@ relTypeCode = 'article',
 relId = 1,
 `point` = 1;
 
+SELECT *,
+IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
+IFNULL(SUM(IF(RP.point > 0, RP.point,0)),0) AS extra__goodReactionPoint,
+IFNULL(SUM(IF(RP.point < 0, RP.point,0)),0) AS extra__badReactionPoint
+FROM(
+SELECT a.*, m.nickname AS extra__writerName
+FROM article a
+LEFT JOIN `member` AS m
+ON a.memberId = m.id
+) AS a
+LEFT JOIN reactionPoint AS RP
+ON a.id = RP.relId
+GROUP BY a.id;
+
+#SELECT * FROM article;
+#SELECT * FROM `member`;
+#SELECT * FROM board;
+SELECT * FROM reactionPoint;
 # 각 게시물에서 사용자가 좋아요와 싫어요를 할 수 있는지 체크
 /*
 SELECT IFNULL(SUM(point),0) AS p
@@ -243,8 +261,48 @@ ON A.id = RP_SUM.relId
 SET A.goodReactionPoint = RP_SUM.goodReactionPoint,
 A.badReactionPoint = RP_SUM.badReactionPoint;
 
-#SELECT * FROM article;
-#SELECT * FROM `member`;
-#SELECT * FROM board;
-#select * from reactionPoint;
+# 댓글테이블생성
+CREATE TABLE reply(
+id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+regDate DATETIME NOT NULL,
+updateDate DATETIME NOT NULL,
+memberId INT(10) UNSIGNED NOT NULL,
+relTypeCode CHAR(30) NOT NULL COMMENT '관련데이터타입코드',
+relId INT(10) UNSIGNED NOT NULL COMMENT '관련데이터번호',
+`body` TEXT NOT NULL
+);
 
+#테스트 댓글 추가
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글1';
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글2';
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글3';
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 2,
+`body` = '댓글4';
+
+SELECT * FROM reply;
