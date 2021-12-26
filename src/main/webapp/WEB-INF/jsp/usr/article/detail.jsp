@@ -64,21 +64,37 @@
           <tr>
             <th>추천</th>
             <td>
-            <span class="badge badge-primary">${article.goodReactionPoint}</span>
-            <c:if test="${actorCanMakeReactionPoint}">
-            <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-primary">좋아요👍</a>
-            <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-secondary">싫어요👎</a>
-            </c:if>
-            
-            <c:if test="${actorCanCancelGoodReaction}">
-            <a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-primary">좋아요👍</a>
-            <a onclick="alert(this.title); return false;" title="좋아요를 취소해주세요!!" href="#" class="btn btn-xs btn-outline btn-secondary">싫어요👎</a>
-            </c:if>
-            
-            <c:if test="${actorCanCancelBadReaction}">
-            <a onclick="alert(this.title); return false;" title="싫어요를 취소해주세요!!" href="#" class="btn btn-xs btn-outline btn-primary">좋아요👍</a>
-            <a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-secondary ">싫어요👎</a>
-            </c:if>
+              <span class="badge badge-primary">${article.goodReactionPoint}</span>
+              <c:if test="${actorCanMakeReactionPoint}">
+                <a
+                  href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+                  class="btn btn-xs btn-primary"
+                >좋아요👍</a>
+                <a
+                  href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+                  class="btn btn-xs btn-secondary"
+                >싫어요👎</a>
+              </c:if>
+
+              <c:if test="${actorCanCancelGoodReaction}">
+                <a
+                  href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                  class="btn btn-xs btn-primary"
+                >좋아요👍</a>
+                <a onclick="alert(this.title); return false;" title="좋아요를 취소해주세요!!" href="#"
+                  class="btn btn-xs btn-outline btn-secondary"
+                >싫어요👎</a>
+              </c:if>
+
+              <c:if test="${actorCanCancelBadReaction}">
+                <a onclick="alert(this.title); return false;" title="싫어요를 취소해주세요!!" href="#"
+                  class="btn btn-xs btn-outline btn-primary"
+                >좋아요👍</a>
+                <a
+                  href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                  class="btn btn-xs btn-secondary "
+                >싫어요👎</a>
+              </c:if>
             </td>
           </tr>
           <tr>
@@ -111,4 +127,41 @@
     </div>
   </div>
 </section>
+
+<c:if test="${rq.isLogined()}">
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+  <h1>댓글작성</h1>
+  <form class="table-box-type-1" method="POST" action="../reply/doWrite">
+    <div class="table-box-type-1">
+      <table>
+        <colgroup>
+          <col width="200">
+        </colgroup>
+        <tbody>
+          <tr>
+            <th>작성자</th>
+            <td>${rq.loginedMember.nickname}</td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td>
+              <textarea required="required" class="w-full textarea textarea-bordered" name="body" rows="5"
+                placeholder="내용"
+              ></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th>댓글작성</th>
+            <td>
+              <button type="submit" class="btn btn-primary">댓글작성</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </form>
+  </div>
+</section>
+</c:if>
 <%@ include file="../common/foot.jspf"%>

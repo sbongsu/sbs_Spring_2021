@@ -51,6 +51,9 @@ public class Rq {
 		     
 	}
 
+	public boolean isNotLogin() {
+		return !isLogined;
+	}
 	public void printHistoryBackJs(String msg) {
 		res.setContentType("text/html; charset=utf-8");
 		print(Ut.jsHistoryBack(msg));
