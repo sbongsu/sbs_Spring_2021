@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.service.BoardService;
 import com.sbs.exam.demo.service.ReactionPointService;
+import com.sbs.exam.demo.service.ReplyService;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.Board;
+import com.sbs.exam.demo.vo.Reply;
 import com.sbs.exam.demo.vo.ResultData;
 import com.sbs.exam.demo.vo.Rq;
 
@@ -25,12 +27,15 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
 	private ReactionPointService reactionPointService;
+	private ReplyService replyService;
 	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService, ReactionPointService reactionPointService,Rq rq) {
+
+	public UsrArticleController(ArticleService articleService, BoardService boardService, ReactionPointService reactionPointService, ReplyService replyService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
 		this.reactionPointService = reactionPointService;
+		this.replyService = replyService;
 		this.rq = rq;
 	}
 
@@ -96,6 +101,9 @@ public class UsrArticleController {
 		Article article = articleService.getForPrintArticle(rq.getIsLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMember(), "article", id);
+		int repliesCount = replies.size();
+		model.addAttribute("repliesCount", repliesCount);
 		
 		ResultData actorCanMakeReactionPointRd  = reactionPointService.actorCanMakeReactionPoint(rq.getIsLoginedMemberId(),"article", id);
 		model.addAttribute("actorCanMakeReactionPoint", actorCanMakeReactionPointRd.isSuccess());
