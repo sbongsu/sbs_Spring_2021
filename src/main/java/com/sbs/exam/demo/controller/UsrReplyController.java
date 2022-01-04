@@ -39,10 +39,7 @@ public class UsrReplyController {
 				body);
 		int id = writeRelyRd.getData1();
 
-		if (Ut.empty(replaceUri)) {
-			replaceUri = Ut.f("../article/detail?id=%d", id);
-		}
-
+	
 		if (Ut.empty(replaceUri)) {
 			switch (relTypeCode) {
 			case "article":

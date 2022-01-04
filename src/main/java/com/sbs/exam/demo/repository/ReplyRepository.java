@@ -28,7 +28,8 @@ public interface ReplyRepository {
 	int getLastInsertId();
 
 	@Select("""
-			SELECT *
+			SELECT R.*,
+			M.nickname AS extra__writerName
 			FROM reply AS R
 			LEFT JOIN `member` AS M
 			ON R.memberId = M.id
