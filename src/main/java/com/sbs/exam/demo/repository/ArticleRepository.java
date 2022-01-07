@@ -71,5 +71,13 @@ public interface ArticleRepository {
 			""")
 	public int decreaseBadReactionPoint(int relId);
 
+	
+	@Select("""
+			SELECT *
+			FROM article
+			WHERE id = #{relId}
+			""")
+	public Article getArticle(int relId);
+
 
 }

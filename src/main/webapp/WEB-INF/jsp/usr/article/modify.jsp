@@ -4,9 +4,39 @@
 <c:set var="pageTitle" value="게시물 수정" />
 <%@ include file="../common/head.jspf"%>
 
+<script>
+  let ArticleModify__submitDone = false;
+  function ArticleModify__submit(form) {
+    if ( ArticleModify__submitDone ) {
+      return;
+    }
+    
+   form.title.value = form.title.value.trim();
+    
+    if ( form.title.value.length == 0 ) {
+      alert('제목을 입력해주세요.')
+      form.title.focus();
+      
+      return;
+    }
+    
+    form.body.value = form.body.value.trim();
+    
+    if ( form.body.value.length == 0 ) {
+      alert('내용을 입력해주세요.')
+      form.body.focus();
+      
+      return;
+    }
+    
+    ArticleModify__submitDone = true;
+    form.submit();
+  }
+</script>
+
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../article/doModify">
+    <form class="table-box-type-1" method="POST" action="../article/doModify" onsubmit="ArticleModify__submit(this); return false;">
       <input type="hidden" name="id" value="${article.id}" />
       <table class="border-collapse border-2 border-gray-500">
         <tbody>
@@ -49,7 +79,7 @@
           <tr>
             <th>내용</th>
             <td>
-              <textarea class="w-full textarea h-24 textarea-bordered" name="body" rows="10">${article.body}</textarea>
+              <textarea class="w-full textarea h-24 textarea-bordered" name="body" placeholder="내용" rows="10">${article.body}</textarea>
             </td>
           </tr>
           <tr>
@@ -57,11 +87,6 @@
             <td>
               <input class="btn btn-outline" type="submit" value="수정" />
               <button class="btn btn-outline btn-secondary" type="button" onclick="history.back();">뒤로가기</button>
-              <!--  <c:if test="${article.extra__actorCanDelete}">
-                <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
-                  href="../article/doDelete?id=${article.id}"
-                >게시물 삭제</a>
-              </c:if> -->
             </td>
           </tr>
         </tbody>
