@@ -51,7 +51,7 @@ public class Rq {
 		     
 	}
 
-	public boolean isNotLogin() {
+	public boolean isNotLogined() {
 		return !isLogined;
 	}
 	public void printHistoryBackJs(String msg) {

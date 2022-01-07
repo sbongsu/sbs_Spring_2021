@@ -35,7 +35,7 @@ public class ArticleService {
 				limitStart, limitTake);
 
 		for (Article article : articles) {
-			updatePrrintForData(actorId, article);
+			updatePrintForData(actorId, article);
 		}
 		return articles;
 	}
@@ -44,11 +44,11 @@ public class ArticleService {
 
 		Article article = articleRepository.getForPrintArticle(id);
 
-		updatePrrintForData(actorId, article);
+		updatePrintForData(actorId, article);
 		return article;
 	}
 
-	private void updatePrrintForData(int actorId, Article article) {
+	private void updatePrintForData(int actorId, Article article) {
 
 		if (article == null) {
 			return;

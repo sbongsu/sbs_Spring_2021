@@ -27,7 +27,21 @@ public class ReplyService {
 	}
 
 	public List<Reply> getForPrintReplies(Member actor, String relTypeCode, int relId) {
-		return replyRepository.getForPrintReplies(relTypeCode, relId);
+		List<Reply> replies = replyRepository.getForPrintReplies(relTypeCode, relId);
+
+		for(Reply reply : replies) {
+			updateForPrintData(actor, reply);
+		}
+		return replies;
+	}
+
+	private void updateForPrintData(Member actor, Reply reply) {
+		if (reply == null) {
+			return;
+		}
+		if (reply.getMemberId() == actor.getId()) {
+			reply.setExtra__actorCanDelete(true);
+		}		
 	}
 
 
