@@ -234,12 +234,12 @@
             <td>
               <div class="btns mt-2">
                 <c:if test="${ reply.extra__actorCanDelete}">
-                  <a onclick="if(confirm('게시물을 수정하시겠습니까?') == false ){return false}"
+                  <a onclick="if(confirm('댓글을 수정하시겠습니까?') == false ){return false}"
                     href="../reply/modify?id=${reply.id}" class="btn btn-link"
                   >수정</a>
                 </c:if>
                 <c:if test="${ reply.extra__actorCanDelete}">
-                  <a onclick="if(confirm('게시물을 삭제하시겠습니까?') == false ){return false}"
+                  <a onclick="if(confirm('댓글을 삭제하시겠습니까?') == false ){return false}"
                     href="../reply/doDelete?id=${reply.id}" class="btn btn-link"
                   >삭제</a>
                 </c:if>

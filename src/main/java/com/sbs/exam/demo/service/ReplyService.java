@@ -2,6 +2,7 @@ package com.sbs.exam.demo.service;
 
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.sbs.exam.demo.repository.ReplyRepository;
@@ -35,13 +36,27 @@ public class ReplyService {
 		return replies;
 	}
 
-	private void updateForPrintData(Member actor, Reply reply) {
+	public void updateForPrintData(Member actor, Reply reply) {
 		if (reply == null) {
 			return;
 		}
 		if (reply.getMemberId() == actor.getId()) {
 			reply.setExtra__actorCanDelete(true);
 		}		
+	}
+
+	public Reply getForPrintReply(Member actor, int id) {
+		Reply reply = replyRepository.getForPrintReply(id);
+		
+		updateForPrintData(actor, reply);
+		
+		return reply;
+	}
+
+	public ResultData deleteReply(int id) {
+		replyRepository.deleteReply(id);
+		
+		return ResultData.from("S-1", "댓글을 삭제했습니다!");
 	}
 
 
