@@ -120,5 +120,38 @@ public class UsrReplyController {
 		return "usr/reply/modify";
 	}
 	
+	@RequestMapping("usr/reply/doModify")
+	@ResponseBody
+	public String doModify(int id, String body, String replaceUri) {
+
+		if (Ut.empty(id)) {
+			return rq.jsHistoryBack("id을(를) 입력해주세요");
+		}
+		
+
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
+		
+		if(reply == null) {
+			return rq.jsHistoryBack(Ut.f("%d번 댓글이 존재하지 않습니다.", id));
+		}
+		
+		if(reply.isExtra__actorCanDelete() == false) {
+			return rq.jsHistoryBack(Ut.f("%d번 댓글을 삭제할 권한이 없습니다.", id));
+		}
+
+		ResultData modifyRelyRd = replyService.modifyRely(id,
+				body);
+
+	
+		if (Ut.empty(replaceUri)) {
+			switch (reply.getRelTypeCode()) {
+			case "article":
+				replaceUri = Ut.f("../article/detail?id=%d", reply.getRelId());
+				break;
+			}
+		}
+		
+		return rq.jsReplace(modifyRelyRd.getMsg(), replaceUri);
+	}
 	
 }
