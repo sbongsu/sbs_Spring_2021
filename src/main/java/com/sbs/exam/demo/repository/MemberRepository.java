@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sbs.exam.demo.vo.Member;
 
@@ -47,6 +48,28 @@ public interface MemberRepository {
 			WHERE m.name = #{name}
 			AND m.email = #{email}
 			""")
-	Member getMemberByNameAndEmail(@Param("name")String name, @Param("email") String email);
+	Member getMemberByNameAndEmail(@Param("name") String name, @Param("email") String email);
+
+	@Update("""
+			<script>
+			UPDATE `member`
+			<set>
+			<if test="nickname != null">
+			nickname = #{nickname},
+			</if>
+			<if test="loginPw != null">
+			loginPw = #{loginPw},
+			</if>
+			<if test="email != null">
+			email = #{email},
+			</if>
+			<if test="cellphoneNo != null">
+			cellphoneNo = #{cellphoneNo},
+			</if>
+			</set>
+			WHERE id = #{id}
+			</script>
+			""")
+	void modify(int id, String nickname, String loginPw, String email, String cellphoneNo);
 
 }

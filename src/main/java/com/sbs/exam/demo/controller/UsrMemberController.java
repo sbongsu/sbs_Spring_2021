@@ -95,6 +95,7 @@ public class UsrMemberController {
 		
 		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()),"/");
 	}
+	
 	@RequestMapping("usr/member/doLogout")
 	@ResponseBody
 	public String doLogout() {
@@ -140,5 +141,32 @@ public class UsrMemberController {
 	public String showmodify() {
 
 		return "usr/member/modify";
+	}
+	
+	@RequestMapping("usr/member/doModify")
+	@ResponseBody
+	public String doModify(String nickname, String loginPw, String email, String cellphoneNo) {
+
+		if (Ut.empty(nickname)) {
+			
+			return rq.jsHistoryBack("nickname(을)를 입력해주세요.");
+		}
+		
+		if(Ut.empty(loginPw)) {
+		 loginPw = null;
+		}
+		
+		if (Ut.empty(email)) {
+			
+			return rq.jsHistoryBack("email(을)를 입력해주세요.");
+		}
+		
+		if (Ut.empty(cellphoneNo)) {
+			
+			return rq.jsHistoryBack("cellphoneNo(을)를 입력해주세요.");
+		}
+		ResultData modifyRd = memberService.modify(rq.getIsLoginedMemberId(), nickname, loginPw, email, cellphoneNo);
+		
+		return rq.jsReplace(modifyRd.getMsg(), "/");
 	}
 }

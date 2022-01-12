@@ -43,5 +43,11 @@ public class MemberService {
 		return  memberRepository.getMemberByLoginId(loginId);
 	}
 
+	public ResultData modify(int id, String nickname, String loginPw, String email, String cellphoneNo) {
+
+		memberRepository.modify(id, nickname, loginPw, email, cellphoneNo);
+		return ResultData.from("S-1", "회원정보를 수정했습니다.");
+	}
+
 
 }
