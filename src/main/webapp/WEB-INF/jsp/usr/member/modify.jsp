@@ -61,7 +61,7 @@
     <form class="table-box-type-1" method="POST" action="../member/doModify"
       onsubmit="MypageModify__submit(this); return false;"
     >
-      <input type="hidden" name="id" value="${article.id}" />
+     <input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey}" />
       <table class="border-collapse border-2 border-gray-500">
         <tbody>
           <tr>
